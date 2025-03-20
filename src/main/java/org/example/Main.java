@@ -25,6 +25,17 @@ public class Main extends Application {
         Label analysisLabel = new Label("Trykk for analyse av kort");
         Button dealButton = new Button("Del ut hånd");
         Button analyzeButton = new Button("Analyser hånd");
+        Button flushButton = new Button("Sjekk 5-flush");
+
+
+        dealButton.setPrefWidth(150);
+        dealButton.setPrefHeight(50);
+        analyzeButton.setPrefWidth(150);
+        analyzeButton.setPrefHeight(50);
+        flushButton.setPrefWidth(150);
+        flushButton.setPrefHeight(50);
+
+
 
         dealButton.setOnAction(e -> {
             System.out.println("Deal button pressed");
@@ -41,8 +52,16 @@ public class Main extends Application {
             }
         });
 
-        VBox vbox = new VBox(dealButton, handLabel, analyzeButton, analysisLabel);
-        Scene scene = new Scene(vbox, 1000, 700);
+        flushButton.setOnAction(e -> {
+            if (currentHand != null) {
+                boolean isFlush = analyzer.isFlush(currentHand);
+                analysisLabel.setText(isFlush ? "Hånden er en 5-flush!" : "Hånden er ikke en 5-flush.");
+            }
+        });
+
+        VBox vbox = new VBox(20); // 10 pixels spacing
+        vbox.getChildren().addAll(dealButton, handLabel, analyzeButton, analysisLabel, flushButton);
+        Scene scene = new Scene(vbox, 300, 250);
 
 
         primaryStage.setScene(scene);
@@ -52,7 +71,7 @@ public class Main extends Application {
 
 
 
-    public static void Main(String[] args) {
+    public static void main(String[] args) {
         // Metoden som starter JavaFX-applikasjon
 
         launch(args);

@@ -15,6 +15,20 @@ public class AnalyzeHand {
 
         return suitCount;
     }
+
+
+    public boolean isFlush(String[] hand) {
+        Map<Character, Integer> suitCount = analyzeHand(hand);
+
+        for (int count : suitCount.values()) {
+            if (count == 5) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
 
 /*
