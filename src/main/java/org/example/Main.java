@@ -27,12 +27,14 @@ public class Main extends Application {
         Button analyzeButton = new Button("Analyser hånd");
 
         dealButton.setOnAction(e -> {
-            String[] hand = deck.dealHand(5); // Du kan endre antall kort her
+            System.out.println("Deal button pressed");
+            currentHand = deck.dealHand(5); // Du kan endre antall kort her
             handLabel.setText(String.join(" ", currentHand));
-            analysisLabel.setText(""); // tøm analysen når en ny hånd deles ut
+            analysisLabel.setText(""); // Tøm analysen når en ny hånd deles ut
         });
 
         analyzeButton.setOnAction(e -> {
+            System.out.println("Analyze button pressed");
             if (currentHand != null) {
                 Map<Character, Integer> analysis = analyzer.analyzeHand(currentHand);
                 analysisLabel.setText(analysis.toString());
